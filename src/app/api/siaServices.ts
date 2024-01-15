@@ -1,4 +1,4 @@
-import { API_ENDPOINT, REGISTER_ENDPOINT } from "../constants";
+import { API_ENDPOINT, REGISTER_ENDPOINT } from "@/lib/constants";
 
 export const register = async () => {
   return fetch(REGISTER_ENDPOINT, {
@@ -7,7 +7,6 @@ export const register = async () => {
   })
     .then(async (res) => await res.json())
     .then((result) => {
-      window.localStorage.setItem("token", JSON.stringify(result));
       return result;
     })
     .catch((err) => console.log(err));

@@ -1,11 +1,11 @@
-import { downloadFromRentred, uploadToRenterd } from "./siaUtils";
+import { downloadFromRentred, uploadToRenterd } from "@/app/api/siaServices";
 
 export const getFileNameFromUrl = (url: any) => {
   const urlParts = url.split("/");
   return urlParts[urlParts.length - 1];
 };
 
-export const createFileFromFileUrl = async (imageUrl: any) => {
+export const createFileFromImageUrl = async (imageUrl: any) => {
   const response = await fetch(imageUrl);
   const blob = await response.blob();
   const fileName = getFileNameFromUrl(imageUrl);
@@ -15,7 +15,7 @@ export const createFileFromFileUrl = async (imageUrl: any) => {
 };
 
 export const handleMigration = (file: any) => {
-  createFileFromFileUrl(file.url)
+  createFileFromImageUrl(file.url)
     .then(async (file) => {
       await uploadToRenterd(file);
       await downloadFromRentred();
